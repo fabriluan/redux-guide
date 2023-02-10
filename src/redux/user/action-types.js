@@ -1,6 +1,4 @@
-const UserActionTypes = {
-  LOGIN: "user/login",
-  LOGOUT: "user/logout",
-};
-
-export default UserActionTypes;
+export const UserActionTypes = {
+    LOGIN: 'user/login',
+    LOGGOUT: 'user/loggout'
+}

@@ -42,6 +42,7 @@ export const CartItemQuantity = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  color: #222222;
 
   p {
     margin-left: 10px;
@@ -55,6 +56,7 @@ export const CartItemQuantity = styled.div`
 
 export const RemoveButton = styled.div`
   margin-right: 20px;
+  color: #222222;
 
   &:hover {
     cursor: pointer;

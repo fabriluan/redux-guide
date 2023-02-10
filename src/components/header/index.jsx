@@ -1,5 +1,10 @@
+import { useMemo } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectProductsCount } from "../../redux/cart/cart-selectos";
+import { loggoutUser, loginUser } from "../../redux/user/action";
+// import rootReducer from "../../redux/root-reducer";
+
 
 // Components
 import Cart from "../cart/index";
@@ -8,41 +13,44 @@ import Cart from "../cart/index";
 import * as Styles from "./styles";
 
 // Utilities
-import { loginUser, logoutUser } from "../../redux/user/actions";
 
 function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
 
+  const { currentUser } = useSelector((state) => state.userReducer);
+
   const dispatch = useDispatch();
 
-  const { currentUser } = useSelector((state) => state.userReducer);
+  const productsCount = useSelector(selectProductsCount);
+
+  // console.log(currentUser)
+  // console.log(products)
 
   const handleCartClick = () => {
     setCartIsVisible(true);
   };
 
-  const handleLoginClick = () => {
-    dispatch(loginUser({ name: "Felipe Rocha", email: "felipe@rocha.com" }));
-  };
+  const HandleLoginClick = () => {
+    dispatch(loginUser({ name: 'Fabricio', email: 'fabricio@gmail.com' }));
+  }
 
-  const handleLogoutClick = () => {
-    dispatch(logoutUser());
-  };
+  const HandleLoggoutClick = () => {
+    dispatch(loggoutUser());
+  }
 
   return (
     <Styles.Container>
       <Styles.Logo>Redux Shopping</Styles.Logo>
       <Styles.Buttons>
         {currentUser ? (
-          <div onClick={handleLogoutClick}>Sair</div>
+          <div onClick={ HandleLoggoutClick }>Sair</div>
         ) : (
-          <div onClick={handleLoginClick}>Login</div>
+          <div onClick={ HandleLoginClick }>Login</div>
         )}
-
-        <div onClick={handleCartClick}>Carrinho</div>
+        <div onClick={handleCartClick}>Carrinho ({productsCount})</div>
       </Styles.Buttons>
 
-      <Cart isVisible={cartIsVisible} setIsVisible={setCartIsVisible} />
+      <Cart isVisible={cartIsVisible} setIsVisible={setCartIsVisible} />  
     </Styles.Container>
   );
 }
